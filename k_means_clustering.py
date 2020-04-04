@@ -16,14 +16,12 @@ def getNumberListFromOneLineCsv(file_name):
       break
   return sample
 
-# calculates euclidean distance
+# calculates Manhattan distance
 def distance(si, mi):
   return fabs(si-mi)
 
 sample = getNumberListFromOneLineCsv(sys.argv[1])
 m = getNumberListFromOneLineCsv(sys.argv[2])
-
-print("selected means:")
 
 iteration_means = []
 iteration_means.append(m)
@@ -42,6 +40,7 @@ while(mij_changes):
 
   #show means
   x = 1
+  print("selected means:")
   for mi in m:
     print("  m" + str(x)+" = " + str(mi))
     x += 1
@@ -49,7 +48,7 @@ while(mij_changes):
   # for each value in sample
   for si in sample:
     list_distances_i = []
-    # {value:k_i}
+    # dictionary where Distance is the key and Cluster Position its value.
     distances_index_value = {}
     mi_position = 0
     # for each mean
@@ -83,7 +82,7 @@ while(mij_changes):
       clusters[iteration_index] = k_cluster
 
     # current cluster
-    print("  current cluster:\n  "+str(clusters))
+    print("  current cluster:\n  "+str(clusters[len(clusters) - 1]))
     print("")
 
   # added means of this current iteration
@@ -97,8 +96,8 @@ while(mij_changes):
 
   iteration_index += 1
 
-  print('k-means ' + ('list ' if iteration_index > 0 else '') + 'at ' + str(iteration_index) + 'th iteration:')
-  print('  ' + str(iteration_means))
+  print('means at ' + str(iteration_index) + 'th iteration:')
+  print('  ' + str(iteration_means[len(iteration_means) - 1]))
   print('')
 
   # compare current mean with first of list_means
@@ -117,9 +116,16 @@ while(mij_changes):
     if changes:
       break
     else:
-      print('  k-means does not changes!')
+      print('  finish because means not change!')
       mij_changes = False
 
 print('')
-print('resulting clusters:\n')
-print(clusters)
+print('results:\n')
+k = 0
+last_iteration_mean = iteration_means[len(iteration_means) - 1]
+for mean in last_iteration_mean:
+  last_cluster = clusters[len(clusters) - 1]
+  cluster_k = last_cluster[k];
+  print(' [' + str(k) + '] For mean ' + str(mean) + " its cluster is " + str(cluster_k))
+  k += 1
+print('')

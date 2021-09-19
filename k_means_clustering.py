@@ -96,6 +96,20 @@ while(mij_changes):
 
   iteration_index += 1
 
+  # save in file
+  save_file_content = ''
+  save_row_index = 0
+  for row in clusters[len(clusters) - 1]:
+    for row_i in row:
+      if save_row_index == 0:
+        save_file_content = save_file_content + str(row_i)+',1,0,0\n'
+      elif save_row_index == 1:
+        save_file_content = save_file_content + '0,0,'+str(row_i)+',2\n'
+    save_row_index = save_row_index + 1
+  save_file = open('save'+str(iteration_index)+'.csv', 'w')
+  save_file.write(save_file_content)
+  save_file.close
+  #print('--->should saved: '+str(clusters[len(clusters) - 1]))
   print('means at ' + str(iteration_index) + 'th iteration:')
   print('  ' + str(iteration_means[len(iteration_means) - 1]))
   print('')

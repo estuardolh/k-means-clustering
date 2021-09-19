@@ -1,4 +1,4 @@
-# k-means-clustering
+## k-means-clustering
 Given one dimension sample and guesses means, prints procedure step by step.
 
 ```
@@ -7,9 +7,7 @@ python k_means_clustering.py <SAMPLE>.csv <GUESS_MEANS>.csv
 It uses Manhattan distance calculation.
 
 USAGE
-
 	SAMPLE is a file name for samples file. One row file with numbers comma separated.
-
 	GUESS_MEANS is a file name for guesses means file.  One row file with guesses means comma separated selected from SAMPLE file.
 ```
 
